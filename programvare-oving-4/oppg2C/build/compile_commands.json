@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/hakon/nettsikkerhet/oving4/opg2C/build",
+  "command": "/usr/bin/cc    -std=c11 -Wall -Wextra   -o CMakeFiles/opg2C.dir/main.c.o   -c /home/hakon/nettsikkerhet/oving4/opg2C/main.c",
+  "file": "/home/hakon/nettsikkerhet/oving4/opg2C/main.c"
+}
+]

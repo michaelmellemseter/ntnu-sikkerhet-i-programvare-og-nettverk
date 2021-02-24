@@ -1,0 +1,26 @@
+Oppgave 1
+
+Kompilere: nasm -f elf64 hello.s
+Lage exec: ld hello.o -o hello
+
+Verifiserer at meldingen går til stderr ved kommandoen:
+    ./hello > stdout 2> stderr
+Med denne kommandoen skrives stdout (>) til filen hello.stdout, mens stderr (2>) skrives til filen hello.stderr. Altså bør vi finne output i hello.stderr og ikke noe i hello.stdout.
+
+Bruk denne kommandoen for å finne programmets feilkode etter kjøring:
+    echo $?
+
+
+Oppgave 2
+
+
+Oppgave 3 
+   
+Oppdaterer bibliotek ved å kompilere more_functions.c igjen og skrive over biblioteket
+
+gcc -c -fPIC more_functions.c
+gcc -shared a_function.o more_functions.o -o libfunctions.so
+sudo cp libfunctions.so /usr/lib
+
+Har nå gjort endring i biblioteket uten å måtte lage c_example på nytt (fordel med dynamisk mot statisk bibliotek)
+    

@@ -1,0 +1,1 @@
+/usr/bin/cc  -std=c11 -Wall -Wextra  -rdynamic CMakeFiles/opg2C.dir/main.c.o  -o opg2C 

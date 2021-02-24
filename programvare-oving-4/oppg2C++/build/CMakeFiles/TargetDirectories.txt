@@ -1,0 +1,3 @@
+/home/hakon/nettsikkerhet/oving4/opg2C++/build/CMakeFiles/rebuild_cache.dir
+/home/hakon/nettsikkerhet/oving4/opg2C++/build/CMakeFiles/opg2C++.dir
+/home/hakon/nettsikkerhet/oving4/opg2C++/build/CMakeFiles/edit_cache.dir
