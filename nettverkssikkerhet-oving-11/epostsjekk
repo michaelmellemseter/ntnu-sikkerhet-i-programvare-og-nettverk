@@ -1,0 +1,61 @@
+#! /bin/bash
+# Finn ut mest mulig om epost-domene
+
+# MX-info: Hvilke tjenermaskiner som betjener domenet:
+echo --------------------------------------------------------------
+echo "                 MASKINER SOM BETJENER DOMENET"
+echo --------------------------------------------------------------
+RESULT=`dig $1 MX +short | cut -f2 -d" "`
+
+echo "$RESULT"
+
+# Reversoppslag på adressene som ble funnet ovenfor:
+echo --------------------------------------------------------------
+echo "                         REVERSOPPSLAG"
+echo --------------------------------------------------------------
+for item in $RESULT; do
+	VAR=`nslookup $item | tail -n 4 | grep "Address"`
+	echo "$VAR"
+	echo -------------------------------
+done
+
+
+
+# SPF: Hvem har lov til å sende epost for domenet?
+echo --------------------------------------------------------------
+echo "           MASKINER SOM KAN SENDE POST FOR DOMENET"
+echo --------------------------------------------------------------
+
+
+recursive_lookup () {
+	#Skriver ut hvilke domener vi skal finne for
+	FINN=`echo "$@" | tr ' ' '\n'`
+	echo ----------------------
+	echo "Lookup for:"
+	echo "$FINN"
+
+	# Så lenge det er en ny linje: Kjør SPF
+	while read -r line; do 
+		echo ----------------------
+		MASKINER=`nslookup -type=txt "$line" | 
+		grep "v=spf1" | 
+		cut -f2 -d"\"" | 
+		tr ' ' '\n' | 
+		tail -n +2`
+
+		echo "$MASKINER"
+
+		# Sjekk om det er flere "include" eller "redirect"
+		MORE=`echo "$MASKINER" | 
+		egrep "include|redirect" | 
+		cut -f2 -d":" |
+		cut -f2 -d"="`
+		#recursive_lookup $MORE
+
+		# Om det er flere include kjøres funksjonen rekursivt igjen
+		if [ -z "${MORE}" ]; then echo "Ferdig"; else recursive_lookup "$MORE" ; fi #Sjekker om det er mer vi skal finne
+	done <<< "$FINN"
+	
+}
+
+recursive_lookup $1

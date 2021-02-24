@@ -1,0 +1,13 @@
+q#! /bin/sh
+#Parameteren $1 er filnavn m. katalog
+#Beregn katalognavn utfra filnavn
+JPGDIR=`dirname $1`/jpg
+echo $JPGDIR
+LASTDIR=`dirname $1 | xargs basename`
+echo $LASTDIR
+#Opprett hvis den ikke fins fra før
+if [ ! -d $JPGDIR -a "$LASTDIR" != "jpg" ] ; then 
+	mkdir $JPGDIR 
+	mv $1 $JPGDIR  ; 
+fi
+

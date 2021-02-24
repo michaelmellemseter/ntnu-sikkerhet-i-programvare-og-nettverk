@@ -1,0 +1,30 @@
+CC=g++
+CFLAGS=-O2
+DEPS=fargeskrift.h
+
+.PHONY: all clean install
+
+.SUFFIXES:
+
+
+all: fargedemo fargetest nyefarger
+
+%.o: %.c $(DEPS)
+	$(CC) -c $(CFLAGS) $< -o $@ 
+
+nyefarger: nyefarger.o fargeskrift.o 
+	$(CC) -o nyefarger nyefarger.o fargeskrift.o
+
+fargedemo: fargedemo.o fargeskrift.o 
+	$(CC) -o fargedemo fargedemo.o fargeskrift.o
+
+fargetest: fargetest.o fargeskrift.o
+	$(CC) -o fargetest fargetest.o fargeskrift.ocat 
+
+clean:
+	rm -f *.o fargedemo fargetest nyefarger
+
+install: fargedemo fargetest nyefarger
+	cp fargedemo fargetest nyefarger /usr/local/bin/
+
+

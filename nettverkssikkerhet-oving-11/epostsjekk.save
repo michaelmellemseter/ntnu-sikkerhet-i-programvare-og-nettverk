@@ -1,0 +1,25 @@
+#! /bin/sh
+# Finn ut mest mulig om epost-domene
+#nslookup -type=txt $1
+#nslookup -type=mx $1 
+echo MASKINER SOM BETJENER DOMENET
+echo --------------------------------------------------------------
+RESULT=`dig $1 MX +short | cut -f2 -d" "`
+
+for item in $RESULT; do
+	echo $item
+done
+
+echo --------------------------------------------------------------
+echo NSLOOKUP
+echo --------------------------------------------------------------
+for item in $RESULT; do
+	VAR=`nslookup $item`
+	echo $VAR
+	echo ----------------
+	
+done
+echo --------------------------------------------------------------
+
+
+

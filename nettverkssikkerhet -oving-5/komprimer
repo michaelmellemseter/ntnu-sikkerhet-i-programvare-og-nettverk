@@ -1,0 +1,6 @@
+#! /bin/sh
+# Komprimerer alle filer i /home treet som ble brukt for mer enn 7*24 timer siden
+# og er større enn 10kB 
+
+find /home/hakon/nettsikkerhet/oving5/testmappe -atime +7 -size +10k -exec gzip {} \;
+echo "Komprimering fullført" 

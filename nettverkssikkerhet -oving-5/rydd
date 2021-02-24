@@ -1,0 +1,3 @@
+
+#! /bin/sh
+find /home/hakon/nettsikkerhet/oving5/testmappe -name "*.jpg" ! -path '*/jpg/*.jpg' -exec ./flyttjpg {} \;
